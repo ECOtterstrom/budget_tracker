@@ -16,10 +16,13 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
+var MONGODB_URI = process.env.MONGODB_URI || mongoose.connect("mongodb://localhost/budget", 
+{
   useNewUrlParser: true,
   useFindAndModify: false
 });
+
+mongoose.connect.apply(MONGODB_URI);
 
 // routes
 app.use(require("./routes/api.js"));
