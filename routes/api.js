@@ -31,4 +31,16 @@ router.get("/api/transaction", (req, res) => {
     });
 });
 
+router.get("/api/transaction", function(req, res) {
+  db.Transaction.find({}).then(function(dbTransaction) {
+    res.json(dbTransaction);
+  });
+});
+
+router.put("/api/transaction/:id", function(req, res) {
+  db.Post.updateOne({ _id: req.params.id }, { likes: req.body.likes }).then(function(dbTransaction) {
+    res.json(dbTransaction);
+  });
+});
+
 module.exports = router;

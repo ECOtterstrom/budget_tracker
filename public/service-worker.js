@@ -1,10 +1,10 @@
 const FILES_TO_CACHE = [
   "/",
-  "/index.html",
+  "index.html",
   "/index.js",
-  "/manifest.webmanifest",
-  "/styles.css"
-  "/icons/icon-192x912.png",
+  "manifest.webmanifest",
+  "styles.css",
+  "/icons/icon-192x192.png",
   "/icons/icon-512X512.png"
 ];
 
@@ -42,7 +42,7 @@ self.addEventListener("activate", function (evt) {
 });
 
 // fetch
-self.addEventListener("fetch", function (evt) {
+self.addEventListener("fetch", function(evt) {
   if (evt.request.url.includes("/api/")) {
     evt.respondWith(
       caches.open(DATA_CACHE_NAME).then(cache => {
@@ -64,4 +64,21 @@ self.addEventListener("fetch", function (evt) {
 
     return;
   }
+
+  evt.respondWith(
+    fetch(evt.request).catch(function() {
+      return caches.match(evt.request).then (function(response){
+        if (response) {
+          return response;
+        } else if (event.request.headers.get("accept").includes("text/html")){
+          return caches.match("/")
+        }
+      })
+    }) 
+    // caches.open(CACHE_NAME).then(cache => {
+    //   return cache.match(evt.request).then(response => {
+    //     return response || fetch(evt.request);
+    //   });
+    // })
+  );
 });
