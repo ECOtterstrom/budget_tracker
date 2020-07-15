@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //If deployed, use the deployed database.  Otherwise use the local mongoBudget database.
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/budget"
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://user1:secretpassword1@ds111549.mlab.com:11549/heroku_15gjsngz"
 
 //Connect to the Mongo DB
 mongoose.connect(MONGODB_URI, {
