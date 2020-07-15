@@ -2,7 +2,7 @@ const FILES_TO_CACHE = [
   "/",
   "/icons/icon-192x192.png",
   "/icons/icon-512X512.png",
-  //"/index.html",
+  "/index.html",
   "/index.js",
   "/manifest.webmanifest",
   "/styles.css"
@@ -16,8 +16,7 @@ self.addEventListener("install", function (evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log("Your files were pre-cached successfully!");
-      cache.addAll(FILES_TO_CACHE);
-      //return cache.addAll(FILES_TO_CACHE);
+      return cache.addAll(FILES_TO_CACHE);
     })
   );
 
@@ -76,10 +75,5 @@ self.addEventListener("fetch", function(evt) {
         }
       })
     }) 
-    // caches.open(CACHE_NAME).then(cache => {
-    //   return cache.match(evt.request).then(response => {
-    //     return response || fetch(evt.request);
-    //   });
-    // })
   );
 });
