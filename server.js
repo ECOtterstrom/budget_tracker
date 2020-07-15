@@ -22,7 +22,7 @@ app.use(express.static("public"));
 //Connect to the Mongo DB
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://user1:secretpassword1@ds111549.mlab.com:11549/heroku_15gjsngz",
+  "mongodb://user10:password0@ds111549.mlab.com:11549/heroku_15gjsngz",
   {
     useNewUrlParser: true,
     useFindAndModify: false,
