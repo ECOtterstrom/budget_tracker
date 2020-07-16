@@ -2,9 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
-const path = require("path"); //added
 
-const PORT = 5000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -16,10 +15,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-
-
 //If deployed, use the deployed database.  Otherwise use the local mongoBudget database.
-//var MONGODB_URI = process.env.MONGODB_URI || "mongodb://user1:secretpassword1@ds111549.mlab.com:11549/heroku_15gjsngz"
 
 //Connect to the Mongo DB
 mongoose.connect(
@@ -27,8 +23,7 @@ mongoose.connect(
   "mongodb://user10:password0@ds111549.mlab.com:11549/heroku_15gjsngz",
   {
     useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
+    useFindAndModify: false
   });
 
 //Mongoose connection used before deployment
