@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const compression = require("compression");
 const path = require("path"); //added
 
-const PORT = 3000;
+const PORT = 5000;
 
 const app = express();
 
@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
+
+
 
 //If deployed, use the deployed database.  Otherwise use the local mongoBudget database.
 //var MONGODB_URI = process.env.MONGODB_URI || "mongodb://user1:secretpassword1@ds111549.mlab.com:11549/heroku_15gjsngz"
